@@ -24,16 +24,20 @@ namespace HelloWorld
         //Performed once when the game begins
         public void Start()
         {
-            player = new Player("botfly");
+            player = new Player("Hero");
             player.Gold = 50;
             Item botfly = new Item(20, 15, "botfly");
+            Item thecactus = new Item(15, 5, "thecactus");
+            Item impostor = new Item(30, 10, "impostor");
+            Item redbutton = new Item(5, 1, "redbutton");
+            Item bottle = new Item(35, 25, "bottle");
             shop = new Shop();
 
             shop.AddItem(botfly, 0);
-            shop.AddItem(botfly, 1);
-            shop.AddItem(botfly, 2);
-            shop.AddItem(botfly, 3);
-            shop.AddItem(botfly, 4);
+            shop.AddItem(thecactus, 1);
+            shop.AddItem(impostor, 2);
+            shop.AddItem(redbutton, 3);
+            shop.AddItem(bottle, 4);
         }
 
         //Repeated until the game ends
