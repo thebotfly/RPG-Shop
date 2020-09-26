@@ -7,9 +7,9 @@ namespace HelloWorld
 {
     class Item
     {
-        private int _damage;
-        private int _cost;
-        private string _name;
+        protected int _damage;
+        protected int _cost;
+        protected string _name;
 
         public Item(int damage, int cost, string name)
         {
@@ -21,13 +21,25 @@ namespace HelloWorld
         {
             return _damage;
         }
+        public void SetDamage(int damage)
+        {
+            _damage = damage;
+        }
         public int GetCost()
         {
             return _cost;
         }
+        public void SetCost(int cost)
+        {
+            _cost = cost;
+        }
         public string GetName()
         {
             return _name;
+        }
+        public void SetName(string name)
+        {
+            _name = name;
         }
     }
     

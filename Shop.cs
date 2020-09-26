@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,7 +24,9 @@ namespace HelloWorld
                     if (CheckCost(_inventory[0].GetCost(), player.Gold))
                     {
                         player.Gold -= _inventory[0].GetCost();
-                        player.AddItem(_inventory[0], 0);
+                        int index = GetSlot();
+                       
+                        player.AddItem(_inventory[0], index);
                     }
                     break;
                 case '2':
@@ -31,7 +34,10 @@ namespace HelloWorld
                     if (CheckCost(_inventory[1].GetCost(), player.Gold))
                     {
                         player.Gold -= _inventory[1].GetCost();
-                        player.AddItem(_inventory[1], 0);
+                        int index = GetSlot();
+
+                        player.AddItem(_inventory[1], index);
+
                     }
                     break;
                 case '3':
@@ -39,7 +45,9 @@ namespace HelloWorld
                     if (CheckCost(_inventory[2].GetCost(), player.Gold))
                     {
                         player.Gold -= _inventory[2].GetCost();
-                        player.AddItem(_inventory[2], 0);
+                        int index = GetSlot();
+
+                        player.AddItem(_inventory[2], index);
                     }
                     break;
                 case '4':
@@ -47,7 +55,9 @@ namespace HelloWorld
                     if (CheckCost(_inventory[3].GetCost(), player.Gold))
                     {
                         player.Gold -= _inventory[3].GetCost();
-                        player.AddItem(_inventory[3], 0);
+                        int index = GetSlot();
+
+                        player.AddItem(_inventory[3], index);
                     }
                     break;
                 case '5':
@@ -55,7 +65,9 @@ namespace HelloWorld
                     if (CheckCost(_inventory[4].GetCost(), player.Gold))
                     {
                         player.Gold -= _inventory[4].GetCost();
-                        player.AddItem(_inventory[4], 0);
+                        int index = GetSlot();
+
+                        player.AddItem(_inventory[4], index);
                     }
                     break;
             }
@@ -82,5 +94,65 @@ namespace HelloWorld
             Console.WriteLine(cost <= playerGold);
             return cost <= playerGold;
         }
+        private int GetSlot()
+        {
+            Console.WriteLine("What slot do you want to put the item in?");
+            char index = Console.ReadKey().KeyChar;
+            switch (index)
+            {
+                case '1':
+                    {
+                        return 0;
+                        break;
+                    }
+                case '2':
+                    {
+                        return 1;
+                        break;
+                    }
+                case '3':
+                    {
+                        return 2;
+                        break;
+                    }
+                case '4':
+                    {
+                        return 3;
+                        break;
+                    }
+                case '5':
+                    {
+                        return 4;
+                        break;
+                    }
+            }
+            return 0;
+        }
+        public void SuperUser()
+        {
+            Console.WriteLine("Do you want to name the item");
+            string name = Console.ReadLine();
+            Console.WriteLine("What do you want to set the damage to?");
+            string damage = Console.ReadLine();
+            Console.WriteLine("What would you like the cost to");
+            string cost = Console.ReadLine();
+            Console.WriteLine("What slot do you want to put it in?");
+            string index = Console.ReadLine();
+            Int32.TryParse(damage, out int tempDamage);
+            Int32.TryParse(cost, out int tempCost);
+            Int32.TryParse(index, out int tempIndex);
+            Console.WriteLine("Do you want the item to be a Attack or Defense Item?");
+            char choice = Console.ReadKey().KeyChar;
+            if (choice == '1')
+            {
+                AddItem(new Attack_Item(tempDamage, tempCost, name), tempIndex);
+            }
+            if (choice == '2')
+            {
+                AddItem(new Defense_Item(tempDamage, tempCost, name), tempIndex);
+            }
+        }
     }
 }
+
+
