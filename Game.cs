@@ -26,7 +26,7 @@ namespace HelloWorld
         //Performed once when the game begins
         public void Start()
         {
-            player = new Player("botfly");
+            player = new Player("Hero");
             player.Gold = 50;
             Attack_Item botfly = new Attack_Item(20, 15, "botfly");
             Attack_Item thecactus = new Attack_Item(15, 10, "thecactus");
