@@ -7,4 +7,5 @@ Use the 1, 2, 3, 4 number keys to choose if you want to look at the player's inv
  Press 4 to load.
  When your in the shop you can buy five items you can the item's damage and cost.
  When you buy an item you can place the item into a slot in your inventory.
+ This is just a shop.
  
