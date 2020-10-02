@@ -152,6 +152,23 @@ namespace HelloWorld
                 AddItem(new Defense_Item(tempDamage, tempCost, name), tempIndex);
             }
         }
+        public Item[] GetInventory()
+        {
+            return _inventory;
+        }
+        public void AddItem(Item item)
+        {
+            int inter = 0;
+            foreach(Item items in _inventory)
+            {
+                if(items == null)
+                {
+                    AddItem(item, inter);
+                    return;
+                }
+                inter++;
+            }
+        }
     }
 }
 

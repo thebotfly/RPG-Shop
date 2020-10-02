@@ -2,6 +2,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace HelloWorld
 {
@@ -44,7 +45,7 @@ namespace HelloWorld
         //Repeated until the game ends
         public void Update()
         {
-            Console.WriteLine("Would you like to look at your inventory or look at the shop?");
+            Console.WriteLine("Would you like to look at your inventory or look at the shop or do you want to save or load?");
             
             char choice = Console.ReadKey().KeyChar;
             Console.Clear();
@@ -55,6 +56,14 @@ namespace HelloWorld
             if (choice == '2')
             {
                 shop.SellItem(player);
+            }
+            if (choice == '3')
+            {
+                Save(player.GetName());
+            }
+            if (choice == '4')
+            {
+                Load();
             }
             if (choice == 'g')
             {
@@ -76,6 +85,67 @@ namespace HelloWorld
         public void End()
         {
             
+        }
+        public void Save(string _playerName)
+        {
+            StreamWriter writer = File.CreateText("playerinventory.txt");
+            StreamWriter writer2 = File.CreateText("Shopinventory.txt");
+            writer.WriteLine(player.GetName());
+            writer.WriteLine(player.Gold);
+            Item[] ShopInventory = shop.GetInventory();
+            foreach(Item item in ShopInventory)
+            {
+                writer2.WriteLine(item.GetName());
+                writer2.WriteLine(item.GetDamage());
+                writer2.WriteLine(item.GetCost());
+                if(item is Attack_Item)
+                {
+                    writer2.WriteLine("AttackItem");
+                }
+                if(item is Defense_Item)
+                {
+                    writer2.WriteLine("DefenseItem");
+                }
+            }
+        }
+        public void Load()
+        {
+            if (File.Exists("playerinventory.txt"))
+            {
+                StreamReader reader = File.OpenText("playerinventory.txt");
+                player.SetName(reader.ReadLine());
+                player.Gold = Convert.ToInt32(reader.ReadLine());
+            }
+            if (File.Exists("Shopinventory.txt"))
+            {
+                StreamReader reader = File.OpenText("Shopinventory.txt");
+               
+                string temp;
+                string itemName;
+                int itemDamage;
+                int itemCost;
+                while (true)
+                {
+                    
+                    temp = reader.ReadLine();
+                    if(temp == " ")
+                    {
+                        return;
+                    }
+
+                    itemName = reader.ReadLine();
+                    itemDamage = Convert.ToInt32(reader.ReadLine());
+                    itemCost = Convert.ToInt32(reader.ReadLine());
+                    if (reader.ReadLine()== "AttackItem")
+                    {
+                        shop.AddItem(new Attack_Item(itemDamage, itemCost, itemName));
+                    }
+                    else
+                    {
+                        shop.AddItem(new Defense_Item(itemDamage, itemCost, itemName));
+                    }
+                }
+            }
         }
     }
 }
