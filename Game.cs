@@ -89,7 +89,9 @@ namespace HelloWorld
         public void Save(string _playerName)
         {
             StreamWriter writer = File.CreateText("playerinventory.txt");
+            writer.Close();
             StreamWriter writer2 = File.CreateText("Shopinventory.txt");
+            writer2.Close();
             writer.WriteLine(player.GetName());
             writer.WriteLine(player.Gold);
             Item[] ShopInventory = shop.GetInventory();
