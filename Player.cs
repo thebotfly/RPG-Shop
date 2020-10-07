@@ -1,22 +1,30 @@
 
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace HelloWorld
 {
     class Player
     {
+        private int _health;
+        
         public int Gold { set; get; }
         private string _playerName;
         Item[] _inventory = new Item[5];
         public Player()
         {
             _playerName = "Hero";
+            _health = 150;
+            _inventory[0] = new Attack_Item(20, 10, "sword");
+            
         }
-        public Player(string playerName)
+        public Player(string playerName, int health)
         {
             _playerName = playerName;
+            _health = health;
+            _inventory[0] = new Attack_Item(20, 10, "sword");
         }
         public void AddItem(Item item, int index)
         {
@@ -74,6 +82,26 @@ namespace HelloWorld
         public void  SetName(string Name)
         {
             _playerName = Name;
+        }
+        public int Gethealth()
+        {
+            return _health;
+        }
+        public void PrintStat()
+        {
+            Console.WriteLine(_playerName);
+            Console.WriteLine(_inventory[0].GetDamage());
+            Console.WriteLine(_health);
+
+
+        }
+        public void Takedamage(int damage)
+        {
+            _health -= damage;
+        }
+        public int Getdamage()
+        {
+            return _inventory[0].GetDamage();
         }
     }
 }
